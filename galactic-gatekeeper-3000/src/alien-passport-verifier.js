@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Alert from "./simple-alert-component";
-import { Camera, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
+import { Camera, CheckCircle, AlertCircle } from 'lucide-react';
 
 const GalacticGatekeeper3000 = () => {
   const [passportNumber, setPassportNumber] = useState("");
@@ -9,6 +9,7 @@ const GalacticGatekeeper3000 = () => {
   const [showCamera, setShowCamera] = useState(false);
   const [currentImage, setCurrentImage] = useState(null);
   const [capturedImage, setCapturedImage] = useState(null);
+  const [error, setError] = useState(null);
 
   // Array of image paths
   const images = [
@@ -34,6 +35,16 @@ const GalacticGatekeeper3000 = () => {
     : "";
 
   const verifyPassport = () => {
+    setError(null);
+    if (!passportNumber.trim()) {
+      setError("Please enter your Alien Passport Number.");
+      return;
+    }
+    if (!capturedImage) {
+      setError("Please capture your alien photo.");
+      return;
+    }
+
     const isValid = Math.random() < 0.5;
     const planet = randomPlanet;
     const reason = isValid
@@ -44,6 +55,7 @@ const GalacticGatekeeper3000 = () => {
 
   const openCamera = () => {
     setShowCamera(true);
+    setCapturedImage(null); // Clear any previously captured image
     setCurrentImage("/images/alien_capture.png");
   };
 
@@ -113,11 +125,11 @@ const GalacticGatekeeper3000 = () => {
             }}
           >
             <Camera style={{ marginRight: "8px" }} />
-            Smile and Click
+            {capturedImage ? "Retake Photo" : "Smile and Click"}
           </button>
         )}
       </div>
-      {capturedImage && (
+      {capturedImage && !showCamera && (
         <div style={{ marginBottom: "20px" }}>
           <img src={capturedImage} alt="Captured alien" style={{ width: "100%", borderRadius: "4px" }} />
         </div>
@@ -153,6 +165,11 @@ const GalacticGatekeeper3000 = () => {
       >
         Verify Passport
       </button>
+      {error && (
+        <div style={{ marginTop: "10px", color: "red" }}>
+          {error}
+        </div>
+      )}
       {verificationResult && (
         <div style={{ marginTop: "20px" }}>
           <Alert type={verificationResult.isValid ? "success" : "error"}>
