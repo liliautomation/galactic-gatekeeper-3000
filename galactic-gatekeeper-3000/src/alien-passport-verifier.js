@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Alert from "./simple-alert-component";
 import { Camera, CheckCircle, AlertCircle } from 'lucide-react';
+import ConfirmModal from "./ConfirmModal"; // Import the ConfirmModal component
 
 const GalacticGatekeeper3000 = () => {
   const [passportNumber, setPassportNumber] = useState("");
@@ -10,13 +11,15 @@ const GalacticGatekeeper3000 = () => {
   const [currentImage, setCurrentImage] = useState(null);
   const [capturedImage, setCapturedImage] = useState(null);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false); // State for showing modal
+  const [names, setNames] = useState(["PAUL S", "DAN D", "DMZ"]); // Array of names
+  const [currentName, setCurrentName] = useState(""); // State for the current name
 
   // Array of image paths
   const images = [
     "/images/alien_01.jpg",
     "/images/alien_02.jpg",
     "/images/alien_03.jpg",
-    // Add more image paths as needed
   ];
 
   useEffect(() => {
@@ -65,7 +68,7 @@ const GalacticGatekeeper3000 = () => {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "0 auto", padding: "20px" }}>
+    <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
       <h1 style={{ textAlign: "center", color: "#6200ee" }}>
         Galactic Gatekeeper 3000
       </h1>
@@ -171,26 +174,44 @@ const GalacticGatekeeper3000 = () => {
         </div>
       )}
       {verificationResult && (
-        <div style={{ marginTop: "20px" }}>
-          <Alert type={verificationResult.isValid ? "success" : "error"}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              {verificationResult.isValid ? (
-                <CheckCircle style={{ marginRight: "8px" }} />
-              ) : (
-                <AlertCircle style={{ marginRight: "8px" }} />
-              )}
-              <div>
-                <h4>
-                  {verificationResult.isValid
-                    ? "Passport Verified"
-                    : "Verification Failed"}
-                </h4>
-                <p>{verificationResult.reason}</p>
-              </div>
-            </div>
-          </Alert>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            marginTop: "20px",
+          }}
+        >
+          {verificationResult.isValid && (
+            <img
+              src={getRandomImage()} // Use the random image URL or path
+              alt="Verified"
+              style={{
+                width: "150px",
+                height: "auto",
+                borderRadius: "8px",
+                marginRight: "20px",
+              }}
+            />
+          )}
+          <div style={{ flex: 1 }}>
+            <Alert type={verificationResult.isValid ? "success" : "error"}>
+              <h4>
+                {verificationResult.isValid
+                  ? "Passport Verified"
+                  : "Verification Failed"}
+              </h4>
+              <p>{verificationResult.reason}</p>
+            </Alert>
+          </div>
         </div>
       )}
+      <ConfirmModal
+        show={showModal}
+        onClose={handleClose}
+        onConfirm={handleConfirm}
+        onNext={handleNext}
+        name={currentName}
+      />
     </div>
   );
 };
