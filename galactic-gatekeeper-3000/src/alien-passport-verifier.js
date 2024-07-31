@@ -6,6 +6,14 @@ const GalacticGatekeeper3000 = () => {
   const [verificationResult, setVerificationResult] = useState(null);
   const [data, setData] = useState(null);
 
+  // Array of image URLs or paths
+  const images = [
+    "/images/alien_01.jpg",
+    "/images/alien_02.jpg",
+    "/images/alien_03.jpg",
+    // Add more image paths or URLs as needed
+  ];
+
   useEffect(() => {
     fetch("app.data.json")
       .then((response) => response.json())
@@ -28,6 +36,13 @@ const GalacticGatekeeper3000 = () => {
       ? `Welcome, traveler from ${planet}!`
       : randomElement;
     setVerificationResult({ isValid, reason });
+  };
+
+  // Function to get a random image
+  const getRandomImage = () => {
+    if (images.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
   };
 
   return (
@@ -67,14 +82,25 @@ const GalacticGatekeeper3000 = () => {
         Verify Passport
       </button>
       {verificationResult && (
-        <Alert type={verificationResult.isValid ? "success" : "error"}>
-          <h4>
-            {verificationResult.isValid
-              ? "Passport Verified"
-              : "Verification Failed"}
-          </h4>
-          <p>{verificationResult.reason}</p>
-        </Alert>
+        <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+          {verificationResult.isValid && (
+            <img
+              src={getRandomImage()} // Use the random image URL or path
+              alt="Verified"
+              style={{ width: "100px", height: "auto", borderRadius: "8px", marginRight: "20px" }}
+            />
+          )}
+          <div>
+            <Alert type={verificationResult.isValid ? "success" : "error"}>
+              <h4>
+                {verificationResult.isValid
+                  ? "Passport Verified"
+                  : "Verification Failed"}
+              </h4>
+              <p>{verificationResult.reason}</p>
+            </Alert>
+          </div>
+        </div>
       )}
     </div>
   );

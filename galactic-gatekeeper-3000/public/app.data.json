@@ -1,27 +1,26 @@
 {
     "planets": [
-        "Xylaris",
-        "Tormar",
-        "Zenthara",
-        "Lunara",
-        "Orionis",
-        "Vortax",
-        "Krynnar",
-        "Eldoria",
-        "Rynox",
-        "Zephyra"
+        "Zarathor Vortex",
+        "Nebulon Prime",
+        "Vortexia",
+        "Eldarion Nexus",
+        "Xylaris Rift",
+        "Quasarion",
+        "Omniara",
+        "Astralis IV",
+        "Celestara",
+        "Draconis Halo"
     ],
     "verificationFailures": [
-        "On earth: Welcome to the planet.",
-        "Galactic Code Mismatch: The passport's galactic code does not align with the interstellar database records.",
-        "Temporal Anomaly: The passport's issue date is from a different time zone or era, causing confusion with current records.",
-        "Signature Encryption Error: The biometric signature encryption fails due to outdated cryptographic algorithms.",
-        "Interstellar Origin Conflict: The origin planet listed on the passport is marked as a restricted zone or non-existent.",
-        "Cosmic Radiation Interference: High levels of cosmic radiation have corrupted the passport's digital data.",
-        "Dimensional Drift: The passport appears to be from an alternate dimension with incompatible verification systems.",
-        "Alien Language Translation Error: The passport contains text or symbols that cannot be properly translated by the verification system.",
-        "Holographic Security Breach: The holographic security features have been tampered with or are displaying incorrect information.",
-        "Temporal Paradox: The passport is from a timeline that diverged from the current galactic timeline, causing verification issues.",
-        "Bio-Metric Scan Discrepancy: The biometric scan data does not match the records of the passport holder, possibly due to identity theft or cloning."
+        "Quantum Flux Disruption: A quantum flux anomaly is disrupting the verification process. Try again later.",
+        "Dimensional Rift Detected: The passport appears to be from a dimension with incompatible verification protocols.",
+        "Galactic Entropy Error: The data from the passport has deteriorated beyond the acceptable entropy threshold.",
+        "Hyperdrive Malfunction: A malfunction in the hyperdrive data relay system is causing verification issues.",
+        "Temporal Rift Error: The passport data seems to be from an alternate timeline with inconsistent records.",
+        "Stellar Signature Mismatch: The passport's stellar signature does not match any known star systems.",
+        "Subspace Communication Failure: Subspace channels are experiencing interference, hindering the verification process.",
+        "Cosmic Anomaly Interference: A cosmic anomaly is interfering with the passport's electronic verification.",
+        "Interstellar Signal Decryption Failure: The signal from the passport cannot be decrypted due to encryption issues.",
+        "Nebula Data Distortion: Data from the passport has been distorted by nebula radiation, causing verification failure."
     ]
 }
