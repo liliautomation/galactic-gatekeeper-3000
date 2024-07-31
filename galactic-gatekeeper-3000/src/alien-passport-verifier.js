@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Alert from "./simple-alert-component";
 import { Camera, CheckCircle, AlertCircle } from 'lucide-react';
-import ConfirmModal from "./ConfirmModal"; // Import the ConfirmModal component
+import ConfirmModal from "./ConfirmModal";
 
 const GalacticGatekeeper3000 = () => {
   const [passportNumber, setPassportNumber] = useState("");
@@ -11,11 +11,11 @@ const GalacticGatekeeper3000 = () => {
   const [currentImage, setCurrentImage] = useState(null);
   const [capturedImage, setCapturedImage] = useState(null);
   const [error, setError] = useState(null);
-  const [showModal, setShowModal] = useState(false); // State for showing modal
-  const [names, setNames] = useState(["PAUL S", "DAN D", "DMZ"]); // Array of names
-  const [currentName, setCurrentName] = useState(""); // State for the current name
+  const [showModal, setShowModal] = useState(false);
+  const [names, setNames] = useState(["PAUL S", "DAN D", "DMZ"]);
+  const [currentName, setCurrentName] = useState("");
+  const [passportImage, setPassportImage] = useState(null);
 
-  // Array of image paths
   const images = [
     "/images/alien_01.jpg",
     "/images/alien_02.jpg",
@@ -39,6 +39,7 @@ const GalacticGatekeeper3000 = () => {
 
   const verifyPassport = () => {
     setError(null);
+    setPassportImage(null);
     if (!passportNumber.trim()) {
       setError("Please enter your Alien Passport Number.");
       return;
@@ -54,17 +55,39 @@ const GalacticGatekeeper3000 = () => {
       ? `Welcome, traveler from ${planet}!`
       : randomElement;
     setVerificationResult({ isValid, reason });
+
+    if (isValid) {
+      const randomPassportImage = images[Math.floor(Math.random() * images.length)];
+      setPassportImage(randomPassportImage);
+      setCurrentName(names[Math.floor(Math.random() * names.length)]);
+      setShowModal(true);
+    }
   };
 
   const openCamera = () => {
     setShowCamera(true);
-    setCapturedImage(null); // Clear any previously captured image
+    setCapturedImage(null);
     setCurrentImage("/images/alien_capture.png");
   };
 
   const capturePhoto = () => {
     setCapturedImage(currentImage);
     setShowCamera(false);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
+  const handleConfirm = () => {
+    setShowModal(false);
+    // Additional logic for confirmation if needed
+  };
+
+  const handleNext = () => {
+    const currentIndex = names.indexOf(currentName);
+    const nextIndex = (currentIndex + 1) % names.length;
+    setCurrentName(names[nextIndex]);
   };
 
   return (
@@ -132,9 +155,10 @@ const GalacticGatekeeper3000 = () => {
           </button>
         )}
       </div>
-      {capturedImage && !showCamera && (
+      {capturedImage && !showCamera && !verificationResult && (
         <div style={{ marginBottom: "20px" }}>
-          <img src={capturedImage} alt="Captured alien" style={{ width: "100%", borderRadius: "4px" }} />
+          <h5 style={{ marginBottom: "5px" }}>Captured Image:</h5>
+          <img src={capturedImage} alt="Captured alien" style={{ width: "100%", borderRadius: "4px", border: "2px solid #6200ee" }} />
         </div>
       )}
       <div style={{ marginBottom: "20px" }}>
@@ -174,34 +198,40 @@ const GalacticGatekeeper3000 = () => {
         </div>
       )}
       {verificationResult && (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-start",
-            marginTop: "20px",
-          }}
-        >
-          {verificationResult.isValid && (
-            <img
-              src={getRandomImage()} // Use the random image URL or path
-              alt="Verified"
-              style={{
-                width: "150px",
-                height: "auto",
-                borderRadius: "8px",
-                marginRight: "20px",
-              }}
-            />
-          )}
-          <div style={{ flex: 1 }}>
-            <Alert type={verificationResult.isValid ? "success" : "error"}>
-              <h4>
-                {verificationResult.isValid
-                  ? "Passport Verified"
-                  : "Verification Failed"}
-              </h4>
-              <p>{verificationResult.reason}</p>
-            </Alert>
+        <div style={{ marginTop: "20px" }}>
+          <Alert type={verificationResult.isValid ? "success" : "error"}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              {verificationResult.isValid ? (
+                <CheckCircle style={{ marginRight: "8px" }} />
+              ) : (
+                <AlertCircle style={{ marginRight: "8px" }} />
+              )}
+              <div>
+                <h4>
+                  {verificationResult.isValid
+                    ? "Passport Verified"
+                    : "Verification Failed"}
+                </h4>
+                <p>{verificationResult.reason}</p>
+              </div>
+            </div>
+          </Alert>
+        </div>
+      )}
+      {capturedImage && (
+        <div style={{ marginTop: "20px" }}>
+          <h4 style={{ marginBottom: "10px" }}>Your Galactic Identity:</h4>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ width: "48%" }}>
+              <h5 style={{ marginBottom: "5px" }}>Captured Image:</h5>
+              <img src={capturedImage} alt="Captured alien" style={{ width: "100%", borderRadius: "4px", border: "2px solid #6200ee" }} />
+            </div>
+            {verificationResult && verificationResult.isValid && passportImage && (
+              <div style={{ width: "48%" }}>
+                <h5 style={{ marginBottom: "5px" }}>Passport Image:</h5>
+                <img src={passportImage} alt="Alien Passport" style={{ width: "100%", borderRadius: "4px", border: "2px solid #6200ee" }} />
+              </div>
+            )}
           </div>
         </div>
       )}
