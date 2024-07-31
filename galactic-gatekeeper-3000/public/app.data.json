@@ -1,0 +1,27 @@
+{
+    "planets": [
+        "Xylaris",
+        "Tormar",
+        "Zenthara",
+        "Lunara",
+        "Orionis",
+        "Vortax",
+        "Krynnar",
+        "Eldoria",
+        "Rynox",
+        "Zephyra"
+    ],
+    "verificationFailures": [
+        "On earth: Welcome to the planet.",
+        "Galactic Code Mismatch: The passport's galactic code does not align with the interstellar database records.",
+        "Temporal Anomaly: The passport's issue date is from a different time zone or era, causing confusion with current records.",
+        "Signature Encryption Error: The biometric signature encryption fails due to outdated cryptographic algorithms.",
+        "Interstellar Origin Conflict: The origin planet listed on the passport is marked as a restricted zone or non-existent.",
+        "Cosmic Radiation Interference: High levels of cosmic radiation have corrupted the passport's digital data.",
+        "Dimensional Drift: The passport appears to be from an alternate dimension with incompatible verification systems.",
+        "Alien Language Translation Error: The passport contains text or symbols that cannot be properly translated by the verification system.",
+        "Holographic Security Breach: The holographic security features have been tampered with or are displaying incorrect information.",
+        "Temporal Paradox: The passport is from a timeline that diverged from the current galactic timeline, causing verification issues.",
+        "Bio-Metric Scan Discrepancy: The biometric scan data does not match the records of the passport holder, possibly due to identity theft or cloning."
+    ]
+}
