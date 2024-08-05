@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Alert from "./simple-alert-component";
-import { Camera, CheckCircle, AlertCircle } from 'lucide-react';
+import { Camera, CheckCircle, AlertCircle } from "lucide-react";
 import ConfirmModal from "./ConfirmModal";
 
 const GalacticGatekeeper3000 = () => {
@@ -12,7 +12,7 @@ const GalacticGatekeeper3000 = () => {
   const [capturedImage, setCapturedImage] = useState(null);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [names, setNames] = useState(["PAUL S", "DAN D", "DMZ"]);
+  const [names] = useState(["PAUL S", "DAN D", "DMZ"]);
   const [currentName, setCurrentName] = useState("");
   const [passportImage, setPassportImage] = useState(null);
 
@@ -57,7 +57,8 @@ const GalacticGatekeeper3000 = () => {
     setVerificationResult({ isValid, reason });
 
     if (isValid) {
-      const randomPassportImage = images[Math.floor(Math.random() * images.length)];
+      const randomPassportImage =
+        images[Math.floor(Math.random() * images.length)];
       setPassportImage(randomPassportImage);
       setCurrentName(names[Math.floor(Math.random() * names.length)]);
       setShowModal(true);
@@ -81,6 +82,7 @@ const GalacticGatekeeper3000 = () => {
 
   const handleConfirm = () => {
     setShowModal(false);
+    alert("YOU LOOK LIKE A HUMAN");
     // Additional logic for confirmation if needed
   };
 
@@ -101,21 +103,23 @@ const GalacticGatekeeper3000 = () => {
         </label>
         {showCamera ? (
           <div style={{ position: "relative", marginBottom: "10px" }}>
-            <img 
-              src={currentImage} 
-              alt="Alien" 
+            <img
+              src={currentImage}
+              alt="Alien"
               style={{ width: "100%", borderRadius: "4px" }}
             />
-            <div style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "80px",
-              height: "80px",
-              border: "4px solid white",
-              borderRadius: "50%"
-            }}></div>
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "80px",
+                height: "80px",
+                border: "4px solid white",
+                borderRadius: "50%",
+              }}
+            ></div>
             <button
               onClick={capturePhoto}
               style={{
@@ -128,7 +132,7 @@ const GalacticGatekeeper3000 = () => {
                 padding: "8px 16px",
                 border: "none",
                 borderRadius: "20px",
-                cursor: "pointer"
+                cursor: "pointer",
               }}
             >
               Capture
@@ -147,7 +151,7 @@ const GalacticGatekeeper3000 = () => {
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center"
+              justifyContent: "center",
             }}
           >
             <Camera style={{ marginRight: "8px" }} />
@@ -158,7 +162,15 @@ const GalacticGatekeeper3000 = () => {
       {capturedImage && !showCamera && !verificationResult && (
         <div style={{ marginBottom: "20px" }}>
           <h5 style={{ marginBottom: "5px" }}>Captured Image:</h5>
-          <img src={capturedImage} alt="Captured alien" style={{ width: "100%", borderRadius: "4px", border: "2px solid #6200ee" }} />
+          <img
+            src={capturedImage}
+            alt="Captured alien"
+            style={{
+              width: "100%",
+              borderRadius: "4px",
+              border: "2px solid #6200ee",
+            }}
+          />
         </div>
       )}
       <div style={{ marginBottom: "20px" }}>
@@ -192,11 +204,7 @@ const GalacticGatekeeper3000 = () => {
       >
         Verify Passport
       </button>
-      {error && (
-        <div style={{ marginTop: "10px", color: "red" }}>
-          {error}
-        </div>
-      )}
+      {error && <div style={{ marginTop: "10px", color: "red" }}>{error}</div>}
       {verificationResult && (
         <div style={{ marginTop: "20px" }}>
           <Alert type={verificationResult.isValid ? "success" : "error"}>
@@ -224,14 +232,32 @@ const GalacticGatekeeper3000 = () => {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div style={{ width: "48%" }}>
               <h5 style={{ marginBottom: "5px" }}>Captured Image:</h5>
-              <img src={capturedImage} alt="Captured alien" style={{ width: "100%", borderRadius: "4px", border: "2px solid #6200ee" }} />
+              <img
+                src={capturedImage}
+                alt="Captured alien"
+                style={{
+                  width: "100%",
+                  borderRadius: "4px",
+                  border: "2px solid #6200ee",
+                }}
+              />
             </div>
-            {verificationResult && verificationResult.isValid && passportImage && (
-              <div style={{ width: "48%" }}>
-                <h5 style={{ marginBottom: "5px" }}>Passport Image:</h5>
-                <img src={passportImage} alt="Alien Passport" style={{ width: "100%", borderRadius: "4px", border: "2px solid #6200ee" }} />
-              </div>
-            )}
+            {verificationResult &&
+              verificationResult.isValid &&
+              passportImage && (
+                <div style={{ width: "48%" }}>
+                  <h5 style={{ marginBottom: "5px" }}>Passport Image:</h5>
+                  <img
+                    src={passportImage}
+                    alt="Alien Passport"
+                    style={{
+                      width: "100%",
+                      borderRadius: "4px",
+                      border: "2px solid #6200ee",
+                    }}
+                  />
+                </div>
+              )}
           </div>
         </div>
       )}
